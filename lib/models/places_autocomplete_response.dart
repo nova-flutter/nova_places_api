@@ -35,8 +35,8 @@ class PlacesAutocompleteResponse {
     return PlacesAutocompleteResponse(
       predictions: parsePlaceAutocompletePrediction(map['predictions'])!,
       status: PlacesStatus.fromValue(map['status']),
-      errorMessage: map['errorMessage'],
-      infoMessages: map['infoMessages']?.cast<String>(),
+      errorMessage: map['error_message'],
+      infoMessages: map['info_messages']?.cast<String>(),
     );
   }
 
