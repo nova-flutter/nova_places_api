@@ -15,7 +15,6 @@ void main() {
     } else {
       final predictions = response.predictions;
       expect(predictions.length, greaterThan(0));
-      print(predictions);
     }
   });
 
