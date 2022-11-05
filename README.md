@@ -46,15 +46,17 @@ if (!response2.isSuccess) {
   predictions.map((p) => p.description).forEach(print);
 }
 
-// third;
-print('\nQuery place detail');
-final response3 = await placesApi.getPlaceDetails(
-  placeId: response1.predictions.first.placeId!,
-);
-if (!response3.isSuccess) {
-  print(response3.errorMessage);
-} else {
-  print(response3.result!.formattedAddress);
-  print(response3.result!.geometry!.location);
+if (response1.isSuccess && response1.predictions.isNotEmpty) {
+  // third;
+  print('\nQuery place detail');
+  final response3 = await placesApi.getPlaceDetails(
+    placeId: response1.predictions.first.placeId!,
+  );
+  if (!response3.isSuccess) {
+    print(response3.errorMessage);
+  } else {
+    print(response3.result!.formattedAddress);
+    print(response3.result!.geometry!.location);
+  }
 }
 ```
