@@ -1,19 +1,19 @@
 import 'package:nova_places_api/nova_places_api.dart';
 
 void main(List<String> arguments) async {
-  final placesApi = PlacesApi('api-key')..setLanguage('en');
+  final placesApi = PlacesApi(apiKey: 'api-key')..setLanguage('en');
 
   // first
   print('Places autocomplete');
   final response1 = await placesApi.placeAutocomplete(
     input: 'amoeba',
-    location: PlaceLocation(
-      latitude: 37.76999,
-      longitude: -122.44696,
-      radius: 500,
+    location: LatLngLiteral(
+      lat: 37.76999,
+      lng: -122.44696,
     ),
+    radius: 500,
     strictBounds: true,
-    types: 'establishment',
+    types: ['establishment'],
     // sessionToken: generateSessionToken()
   );
 
@@ -49,4 +49,6 @@ void main(List<String> arguments) async {
       print(response3.result!.geometry!.location);
     }
   }
+
+  placesApi.dispose();
 }

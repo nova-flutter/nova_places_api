@@ -1,5 +1,6 @@
+import 'package:nova_google_services_core/nova_google_services_core.dart';
+
 import 'place.dart';
-import 'places_status.dart';
 
 class PlacesDetailsResponse {
   const PlacesDetailsResponse({
@@ -17,7 +18,7 @@ class PlacesDetailsResponse {
   final Place? result;
 
   /// Contains the status of the request, and may contain debugging information to help you track down why the request failed.
-  final PlacesStatus status;
+  final ResponseStatus status;
 
   /// When the service returns a status code other than OK<, there may be an additional error_message field within the response object. This field contains more detailed information about thereasons behind the given status code. This field is not always returned, and its content is subject to change.
   final String? errorMessage;
@@ -26,7 +27,7 @@ class PlacesDetailsResponse {
   final List<String>? infoMessages;
 
   bool get isSuccess =>
-      status == PlacesStatus.ok || status == PlacesStatus.zeroResult;
+      status == ResponseStatus.ok || status == ResponseStatus.zeroResult;
 
   @override
   String toString() {
@@ -38,7 +39,7 @@ class PlacesDetailsResponse {
     return PlacesDetailsResponse(
       htmlAttributions: map['html_attributions'].cast<String>(),
       result: map['result'] == null ? null : Place.fromMap(map['result']),
-      status: PlacesStatus.fromValue(map['status']),
+      status: ResponseStatus.fromValue(map['status']),
       errorMessage: map['error_message'],
       infoMessages: map['info_messages']?.cast<String>(),
     );
@@ -48,7 +49,7 @@ class PlacesDetailsResponse {
   factory PlacesDetailsResponse.fromError(String error) {
     return PlacesDetailsResponse(
       htmlAttributions: [],
-      status: PlacesStatus.unknownError,
+      status: ResponseStatus.unknownError,
       errorMessage: error,
       infoMessages: [error],
     );

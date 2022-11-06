@@ -5,7 +5,7 @@ void main() {
   const apiKey = 'api-key';
 
   test('places autocomplete', () async {
-    final placesApi = PlacesApi(apiKey);
+    final placesApi = PlacesApi(apiKey: apiKey);
     final response = await placesApi.placeAutocomplete(
       input: 'Golden Gate Heights',
     );
@@ -19,14 +19,14 @@ void main() {
   });
 
   test('query autocomplete', () async {
-    final placesApi = PlacesApi(apiKey);
+    final placesApi = PlacesApi(apiKey: apiKey);
     final response = await placesApi.queryAutocomplete(
       input: 'Pizza near San Francisco',
-      location: PlaceLocation(
-        latitude: 37.769722,
-        longitude: -122.476944,
-        radius: 10000,
+      location: LatLngLiteral(
+        lat: 37.769722,
+        lng: -122.476944,
       ),
+      radius: 10000,
     );
 
     if (!response.isSuccess) {
@@ -38,10 +38,10 @@ void main() {
   });
 
   test('get place detail', () async {
-    final placesApi = PlacesApi(apiKey);
-    final response = await placesApi.getPlaceDetails(placeId: 'ChIJFS1XN4t9j4AR_QTufcmT4Go');
-
-    print(response);
+    final placesApi = PlacesApi(apiKey: apiKey);
+    final response = await placesApi.getPlaceDetails(
+      placeId: 'ChIJFS1XN4t9j4AR_QTufcmT4Go',
+    );
 
     if (!response.isSuccess) {
       expect(response.status, anything);
